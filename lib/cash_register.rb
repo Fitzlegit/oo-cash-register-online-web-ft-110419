@@ -1,5 +1,6 @@
 require 'pry'
 
+
 class CashRegister
   
   attr_accessor :total, :discount, :items, :last_transaction
@@ -10,6 +11,7 @@ class CashRegister
     @discount = discount
     @items = []
   end
+
   
   # method to add items to cash register
   def add_item(string, float, integer = 1)
@@ -29,7 +31,9 @@ class CashRegister
     if discount > 0
       @total -= @total * (discount / 100.0).to_f
       #gets rid of trailing zeros 
-      total = @total.to_s.sub(/\.?0+$/, '')
+      #total = @total.to_s.sub(/\.0/, '')
+      total.round(2)
+      #limit number of decimal spaces in float 
        return "After the discount, the total comes to $#{total}."
     else
       return "There is no discount to apply."
@@ -37,11 +41,10 @@ class CashRegister
   end
   
   def void_last_transaction
-    @total -= self.last_transaction
+    @total -= @total.last_transaction
   end
-  
-  
-  
+
   
   
 end
+
